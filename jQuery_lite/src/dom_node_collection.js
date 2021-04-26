@@ -134,6 +134,23 @@ class DOMNodeCollection {
     })
   }
 
+  on(typeOfEvent, callback){
+    this.arr.forEach(function(ele){
+      
+      ele.addEventListener(typeOfEvent, callback);
+      ele.listeners = ele.listeners || [];
+      ele.listeners.push(callback);
+    })
+  }
+
+  off(typeOfEvent){
+    this.arr.forEach(function(ele){
+      ele.listeners.forEach(function(listener){
+        ele.removeEventListener(typeOfEvent, listener)
+      })    
+    })
+  }
+
 }
 
 module.exports = DOMNodeCollection;

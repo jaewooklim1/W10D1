@@ -1,5 +1,6 @@
 class DOMNodeCollection {
   constructor(arr){
+    //array of HTML elements
     this.arr = arr;
   }
 
@@ -99,6 +100,40 @@ class DOMNodeCollection {
       })    
     }
   }
+
+  children(){
+    let childNodes = [];
+    this.arr.forEach(function(ele){
+      const nodeList = ele.children;
+      childNodes = childNodes.concat(Array.from(nodeList));
+    })
+    return new DOMNodeCollection(childNodes);
+  }
+
+  parent(){
+    let parentNodes = [];
+    this.arr.forEach(function(ele){
+      parentNodes.push(ele.parentNode);
+    })
+    parentNodes = Array.from(new Set(parentNodes))
+    return new DOMNodeCollection(parentNodes);
+  }
+  
+  find(selector){
+    let childNodes = [];
+    this.arr.forEach(function(ele){
+      const nodeList = ele.querySelectorAll(selector);
+      childNodes = childNodes.concat(Array.from(nodeList));
+    })
+    return new DOMNodeCollection(childNodes);
+  }
+
+  remove(){
+    this.arr.forEach(function(ele){
+      ele.remove()
+    })
+  }
+
 }
 
 module.exports = DOMNodeCollection;

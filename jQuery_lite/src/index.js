@@ -2,9 +2,9 @@
 const DOMNodeCollection = require("./dom_node_collection")
 
 const $l = function(arg){
-  debugger
+  // debugger
   if(typeof(arg) === "string"){
-    debugger
+    // debugger
     let nodeList = document.querySelectorAll(arg);
     let nodeArr = Array.from(nodeList);
     return nodeArr;
@@ -13,4 +13,5 @@ const $l = function(arg){
   }
 }
 
+window.DOMNodeCollection = DOMNodeCollection;
 window.$l = $l;

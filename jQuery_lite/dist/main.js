@@ -15,7 +15,7 @@
   \************************************/
 /***/ ((module) => {
 
-eval("class DOMNodeCollection {\r\n  // constructor(arr){\r\n  //   this.arr = arr;\r\n  // }\r\n\r\n  // html(string) {\r\n\r\n  //   if (string) { \r\n  //     this.arr.forEach(function(ele) {\r\n  //       ele.innerHTML = string;       \r\n  //     })\r\n  //   } else {\r\n  //     return this.arr[0].innerHTML;\r\n  //   }\r\n  // }\r\n\r\n  // empty() {\r\n  //   this.arr.forEach(function(ele) {\r\n  //     ele.innerHTML = \"\";       \r\n  //   })\r\n  // }\r\n\r\n  // append(arg) {\r\n  //   this.arr.forEach(function(ele) {\r\n  //     debugger\r\n  //     arg.outerHTML = ele.innerHTML;\r\n  //   }) \r\n  // }\r\n\r\n\r\n}\r\n\r\nmodule.exports = DOMNodeCollection;\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
+eval("class DOMNodeCollection {\n  constructor(arr){\n    this.arr = arr;\n  }\n\n  html(string) {\n\n    if (string) { \n      this.arr.forEach(function(ele) {\n        ele.innerHTML = string;       \n      })\n    } else {\n      return this.arr[0].innerHTML;\n    }\n  }\n\n  empty() {\n    this.arr.forEach(function(ele) {\n      ele.innerHTML = \"\";       \n    })\n  }\n\n  append(arg) {\n    if(typeof(arg) === \"string\"){\n      this.arr.forEach(function(ele) {\n        ele.innerHTML += arg;\n      }) \n    } else if(arg instanceof HTMLElement) {\n      debugger\n      this.arr.forEach(function(ele) {\n        // ele.appendChild(arg);\n        ele.innerHTML += arg\n        // ele.each((child) => Node.appendChild(arg))\n        debugger\n        // arg.outerHTML = ele.innerHTML;\n      }) \n    } else {\n      this.arr.forEach(function(ele1) {\n        arg.arr.forEach(function(ele2){\n          ele2.outerHTML = ele1.innerHTML;\n        })\n      }) \n    }\n  }\n\n\n}\n\nmodule.exports = DOMNodeCollection;\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
 
 /***/ }),
 
@@ -25,7 +25,7 @@ eval("class DOMNodeCollection {\r\n  // constructor(arr){\r\n  //   this.arr = a
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("// window.$l(oneArg)\r\nconst DOMNodeCollection = __webpack_require__(/*! ./dom_node_collection */ \"./src/dom_node_collection.js\")\r\n\r\nconst $l = function(arg){\r\n  debugger\r\n  if(typeof(arg) === \"string\"){\r\n    debugger\r\n    let nodeList = document.querySelectorAll(arg);\r\n    let nodeArr = Array.from(nodeList);\r\n    return nodeArr;\r\n  } else if (arg instanceof HTMLElement){\r\n    return new DOMNodeCollection(arg);\r\n  }\r\n}\r\n\r\nwindow.$l = $l;\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("// window.$l(oneArg)\nconst DOMNodeCollection = __webpack_require__(/*! ./dom_node_collection */ \"./src/dom_node_collection.js\")\n\nconst $l = function(arg){\n  // debugger\n  if(typeof(arg) === \"string\"){\n    // debugger\n    let nodeList = document.querySelectorAll(arg);\n    let nodeArr = Array.from(nodeList);\n    return nodeArr;\n  } else if (arg instanceof HTMLElement){\n    return new DOMNodeCollection(arg);\n  }\n}\n\nwindow.DOMNodeCollection = DOMNodeCollection;\nwindow.$l = $l;\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 
